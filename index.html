@@ -5,44 +5,146 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>家庭与儿童实验室</title>
   <style>
+    :root {
+      --primary: #FFB6A0;
+      --secondary: #8AC4B4;
+      --accent: #FFD8A8;
+      --neutral: #FFF8F0;
+      --text: #5A4D41;
+    }
+
     body {
       font-family: "Helvetica Neue", sans-serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
-      color: #333;
+      background: var(--neutral);
+      color: var(--text);
     }
+
     header {
-      background-color: #4a90e2;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       color: white;
-      padding: 40px;
+      padding: 60px 20px;
       text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
+
     nav {
-      background-color: #eee;
-      padding: 10px 20px;
-      text-align: center;
+      background: var(--secondary);
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+
     nav a {
-      margin: 0 15px;
-      color: #333;
+      margin: 0 25px;
+      color: var(--text);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      transition: all 0.3s;
+      padding: 8px 12px;
+      border-radius: 4px;
     }
-    section {
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .page-section {
+      display: none;
       padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
+      max-width: 1000px;
+      margin: 30px auto;
       background: white;
-      margin-top: 20px;
-      border-radius: 8px;
+      border-radius: 12px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      min-height: 60vh;
+      animation: fadeIn 0.5s ease;
     }
-    footer {
-      background-color: #eee;
+
+    .page-section.active {
+      display: block;
+    }
+
+    .team-section {
+      display: grid;
+      gap: 30px;
+    }
+
+    .director-card {
+      background: var(--neutral);
+      padding: 30px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      border: 2px solid var(--secondary);
+    }
+
+    .director-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .member-card {
+      background: var(--neutral);
       padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    .qr-code {
+      width: 180px;
+      height: 180px;
+      background: #eee;
+      margin: 15px 0;
+    }
+
+    footer {
+      background: var(--secondary);
+      padding: 30px;
       text-align: center;
-      font-size: 14px;
-      color: #666;
+      margin-top: 50px;
+      color: var(--text);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      nav a {
+        margin: 0 10px;
+        padding: 6px;
+      }
+      
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .director-card {
+        flex-direction: column;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -53,26 +155,109 @@
   </header>
 
   <nav>
-    <a href="#">首页</a>
-    <a href="#">研究方向</a>
-    <a href="#">团队成员</a>
-    <a href="#">成果发布</a>
-    <a href="#">加入我们</a>
-    <a href="#">联系我们</a>
+    <a href="#home" class="nav-link">首页</a>
+    <a href="#team" class="nav-link">团队成员</a>
+    <a href="#research" class="nav-link">研究成果</a>
+    <a href="#contact" class="nav-link">联系我们</a>
   </nav>
 
-  <section>
+  <section id="home" class="page-section active">
     <h2>实验室简介</h2>
-    <p>欢迎来到家庭与儿童实验室！我们关注家庭环境、亲子关系与儿童心理发展的交叉研究。更多内容敬请期待。</p>
+    <p>我们致力于研究家庭环境对儿童认知与社会情感发展的影响，通过跨学科方法推动儿童友好型家庭建设。</p>
   </section>
 
-  <section>
-    <h2>最新动态</h2>
-    <p>暂无更新。</p>
+  <section id="team" class="page-section">
+    <div class="team-section">
+      <h2>研究团队</h2>
+      <div class="director-card">
+        <img src="director-placeholder.jpg" alt="毕爽博士" class="director-photo">
+        <div>
+          <h3>实验室主任 · 毕爽 博士</h3>
+          <p>儿童发展心理学专家，主要研究领域：家庭中不利和保护性的因素，如父母婚姻冲突，教养行为和方式，包括父母共情、攻击性教养行为、正念教养、父母教养焦虑对于儿童社会情绪发展的影响。</p>
+          <a href="[https://zg.gdufs.edu.cn/info/1114/1445.htm]" target="_blank" style="color: var(--text);">访问大学主页 →</a>
+        </div>
+      </div>
+      <div class="members-grid">
+        <div class="member-card">
+          <h4>李研究员</h4>
+          <p>研究方向：家庭数字媒体使用</p>
+        </div>
+        <div class="member-card">
+          <h4>王助理</h4>
+          <p>研究方向：儿童语言发展</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" class="page-section">
+    <h2>研究成果</h2>
+    <div class="research-content">
+      <p>近期发表论文：</p>
+      <ul>
+        <li>Yan, N., Dai, X., Ding, X. & Bi, S.* (2024). Spillover between daily marital interactions and parenting practices: Sensory processing sensitivity as moderators. Social Psychological and Personality Science. (in press). https://doi.org/10.1177/19485506241234093（JCR，Q1；中国科学院2区，心理学TOP，IF = 5.7）</li>
+        <li>Bi, S., Huang, J., Cui, L., & Zhou, H. (2024). Within-family associations between parental psychological control and externalizing problems among Chinese children: Links to between-family mindful parenting. Research on Child and Adolescent Psychopathology, 52(1), 65–77. https://doi.org/10.1007/s10802-023-01101-9</li>
+        <li>Bi, S., Zhou, H., Wang, J., Zhou, H., & Keller, P. S. (2023). Parental mindfulness and externalizing problems in Chinese adolescents: Parenting anxiety and negative parenting as mechanisms. Family Relations, 72 (4), 1643-1655.</li>
+        <li>Ding, R., Bi, S., Luo, Y., Liu, T., Wang, P., He., W., Ni., S. (2023). Mothers’ emotional expressivity in urban and rural societies: Salience and links with young adolescents’ emotional wellbeing and expressivity. Development and Psychopathology, 35 (3), 1130-1146</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="page-section">
+    <h2>联系我们</h2>
+    <div class="contact-content">
+      <div>
+        <h3>电子邮箱</h3>
+        <div id="securedEmail" data-user="familylab" data-domain="university.edu.cn"></div>
+      </div>
+      <div>
+        <h3>微信公众号</h3>
+        <div class="qr-code"></div>
+        <p>扫码关注最新动态</p>
+      </div>
+    </div>
   </section>
 
   <footer>
-    © 2025 家庭与儿童实验室 | 页面由 GitHub Pages 支持
+    © 2025 家庭与儿童实验室 | 温暖守护每个家庭的成长
   </footer>
+
+  <script>
+    // 页面切换功能
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        showPage(targetId);
+        history.pushState(null, null, `#${targetId}`);
+      });
+    });
+
+    // 显示指定页面
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    // 处理浏览器历史记录
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash.substring(1);
+      showPage(hash || 'home');
+    });
+
+    // 初始化页面
+    window.addEventListener('DOMContentLoaded', () => {
+      const initialPage = window.location.hash.substring(1) || 'home';
+      showPage(initialPage);
+    });
+
+    // 邮箱防爬虫处理
+    document.getElementById('securedEmail').innerHTML = 
+      `<a href="mailto:${document.getElementById('securedEmail').dataset.user}@${document.getElementById('securedEmail').dataset.domain}">
+        ${document.getElementById('securedEmail').dataset.user}@${document.getElementById('securedEmail').dataset.domain}
+      </a>`;
+  </script>
 </body>
 </html>
